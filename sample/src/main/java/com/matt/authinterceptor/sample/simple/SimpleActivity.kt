@@ -1,10 +1,12 @@
-package com.matt.authinterceptor.sample
+package com.matt.authinterceptor.sample.simple
 
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import com.matt.authinterceptor.AuthInterceptor
 import com.matt.authinterceptor.HeaderWriter
+import com.matt.authinterceptor.sample.R
+import com.matt.authinterceptor.sample.data.TokenRepository
 import com.matt.authinterceptor.sample.api.RestApiService
 import com.matt.authinterceptor.sample.api.data.Credentials
 import com.matt.authinterceptor.sample.api.data.Profile
