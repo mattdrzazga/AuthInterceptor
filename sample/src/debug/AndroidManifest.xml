@@ -8,6 +8,10 @@
             android:name=".simple.SimpleActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".withdagger.di.ActivityWithDagger"
+            android:exported="true" />
+
     </application>
 
 </manifest>

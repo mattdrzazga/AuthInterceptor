@@ -1,6 +1,5 @@
 package com.matt.authinterceptor.sample.withdagger.di
 
-import com.matt.authinterceptor.sample.withdagger.ActivityWithDagger
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
