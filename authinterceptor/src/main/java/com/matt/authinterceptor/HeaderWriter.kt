@@ -21,6 +21,10 @@ class HeaderWriter(private val repository: TokenStore) {
         return request.headers().values(AT).isNotEmpty()
     }
 
+    private fun hasAtHeaders(request: Request): Boolean {
+        return request.headers().values(AT).isNotEmpty()
+    }
+
     companion object {
         private const val AT = "@"
         const val NO_AUTH_HEADER = "$AT: NoAuth"
