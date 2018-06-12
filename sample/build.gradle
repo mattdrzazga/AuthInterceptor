@@ -1,12 +1,11 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.targetSdkVersion
-
-
-
     defaultConfig {
+        applicationId "com.matt.authinterceptor"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdkVersion
         versionCode 1
