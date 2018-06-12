@@ -1,4 +1,4 @@
-package com.matt.authinterceptor.sample
+package com.matt.authinterceptor.sample.data
 
 import android.content.SharedPreferences
 import com.matt.authinterceptor.TokenStore
