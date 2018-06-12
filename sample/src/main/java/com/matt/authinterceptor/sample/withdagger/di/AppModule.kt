@@ -18,9 +18,6 @@ abstract class AppModule {
     @Binds
     abstract fun bindContext(app: AuthApp): Context
 
-    @Binds
-    abstract fun bindTokenRepository(repository: TokenRepository): TokenStore
-
     @Module
     companion object {
         @Provides
@@ -28,6 +25,13 @@ abstract class AppModule {
         @Singleton
         fun provideSharedPreferences(app: Context): SharedPreferences {
             return PreferenceManager.getDefaultSharedPreferences(app)
+        }
+
+        @Provides
+        @JvmStatic
+        @Singleton
+        fun provideTokenRepository(preferences: SharedPreferences): TokenStore {
+            return TokenRepository(preferences)
         }
     }
 }
