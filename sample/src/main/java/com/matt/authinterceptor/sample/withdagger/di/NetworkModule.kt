@@ -22,11 +22,19 @@ class NetworkModule {
 
     @Module
     companion object {
+
         @Provides
         @Singleton
         @JvmStatic
-        fun provideGson(): Gson {
-            return GsonBuilder().create()
+        fun provideHeaderWriter(repository: TokenStore): HeaderWriter {
+            return HeaderWriter(repository)
+        }
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun provideAuthInterceptor(writer: HeaderWriter): AuthInterceptor {
+            return AuthInterceptor(writer)
         }
 
         @Provides
@@ -41,26 +49,19 @@ class NetworkModule {
         @Provides
         @Singleton
         @JvmStatic
+        fun provideGson(): Gson {
+            return GsonBuilder().create()
+        }
+
+        @Provides
+        @Singleton
+        @JvmStatic
         fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
             return Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .baseUrl("http://www.example.com/")
                     .client(okHttpClient)
                     .build()
-        }
-
-        @Provides
-        @Singleton
-        @JvmStatic
-        fun provideHeaderWriter(repository: TokenStore): HeaderWriter {
-            return HeaderWriter(repository)
-        }
-
-        @Provides
-        @Singleton
-        @JvmStatic
-        fun provideAuthInterceptor(writer: HeaderWriter): AuthInterceptor {
-            return AuthInterceptor(writer)
         }
 
         @Provides
