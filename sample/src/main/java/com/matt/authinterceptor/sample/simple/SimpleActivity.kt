@@ -32,7 +32,7 @@ class SimpleActivity : AppCompatActivity() {
                 .build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("www.example.com/")
+                .baseUrl("http://www.example.com/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
