@@ -2,6 +2,7 @@ package com.matt.authinterceptor.sample.withdagger.di
 
 import android.os.Bundle
 import android.util.Log
+import com.google.gson.JsonObject
 import com.matt.authinterceptor.sample.R
 import com.matt.authinterceptor.sample.api.RestApiService
 import com.matt.authinterceptor.sample.api.data.Profile
@@ -28,5 +29,19 @@ class ActivityWithDagger : DaggerAppCompatActivity() {
                 Log.v("AWD", "onResponse: " + response?.body().toString())
             }
         })
+
+        val callback = object : Callback<JsonObject> {
+            override fun onFailure(call: Call<JsonObject>?, t: Throwable?) {
+                Log.v("AWD", "onFailure: " + t.toString())
+            }
+
+            override fun onResponse(call: Call<JsonObject>?, response: Response<JsonObject>?) {
+                Log.v("AWD", "onResponse: " + response?.body().toString())
+            }
+        }
+
+        api.getArticlesDefault().enqueue(callback)
+        api.getArticlesAuth().enqueue(callback)
+        api.getArticlesNoAuth().enqueue(callback)
     }
 }
