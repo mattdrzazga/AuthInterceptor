@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".SimpleActivity"
+            android:name=".simple.SimpleActivity"
             android:exported="true" />
 
     </application>
