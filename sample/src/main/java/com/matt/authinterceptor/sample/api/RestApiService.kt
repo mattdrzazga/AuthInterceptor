@@ -1,7 +1,8 @@
 package com.matt.authinterceptor.sample.api
 
 import com.google.gson.JsonObject
-import com.matt.authinterceptor.HeaderWriter
+import com.matt.authinterceptor.AUTH
+import com.matt.authinterceptor.NO_AUTH
 import com.matt.authinterceptor.sample.api.data.Credentials
 import com.matt.authinterceptor.sample.api.data.Profile
 import okhttp3.MultipartBody
@@ -15,12 +16,23 @@ interface RestApiService {
     fun userProfile(): Call<Profile>
 
     @POST("profile")
-    @Headers(HeaderWriter.NO_AUTH_HEADER)
+    @Headers(NO_AUTH)
     fun signUp(@Body credentials: Credentials): Call<Profile>
+
+    @GET("articles")
+    fun getArticlesDefault(): Call<JsonObject>
+
+    @GET("articles")
+    @Headers(AUTH)
+    fun getArticlesAuth(): Call<JsonObject>
+
+    @GET("articles")
+    @Headers(NO_AUTH)
+    fun getArticlesNoAuth(): Call<JsonObject>
 
     @Multipart
     @POST("attachment")
-    @Headers(HeaderWriter.NO_AUTH_HEADER)
+    @Headers(NO_AUTH)
     fun uploadAttachmentAsUser(@Part file: MultipartBody.Part): Call<JsonObject>
 
     @Multipart

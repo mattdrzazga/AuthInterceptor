@@ -11,7 +11,7 @@ class HeaderWriter(private val repository: TokenStore) {
 
         @Suppress("LiftReturnOrAssignment")
         if (hasNoAuthHeader(request)) {
-            return builder.removeHeader(NO_AUTH_HEADER)
+            return builder.removeHeader(NO_AUTH)
         } else {
             return builder.addHeader(header, token)
         }
@@ -23,10 +23,5 @@ class HeaderWriter(private val repository: TokenStore) {
 
     private fun hasAtHeaders(request: Request): Boolean {
         return request.headers().values(AT).isNotEmpty()
-    }
-
-    companion object {
-        private const val AT = "@"
-        const val NO_AUTH_HEADER = "$AT: NoAuth"
     }
 }
