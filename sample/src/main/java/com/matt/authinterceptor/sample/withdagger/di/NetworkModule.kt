@@ -44,7 +44,7 @@ class NetworkModule {
         fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
             return Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    .baseUrl("www.example.com/")
+                    .baseUrl("http://www.example.com/")
                     .client(okHttpClient)
                     .build()
         }
