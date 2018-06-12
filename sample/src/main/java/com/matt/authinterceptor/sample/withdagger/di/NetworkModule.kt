@@ -20,6 +20,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+    @Module
     companion object {
         @Provides
         @Singleton

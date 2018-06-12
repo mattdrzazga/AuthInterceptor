@@ -21,9 +21,13 @@ abstract class AppModule {
     @Binds
     abstract fun bindTokenRepository(repository: TokenRepository): TokenStore
 
-    @Provides
-    @Singleton
-    fun provideSharedPreferences(app: Context): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(app)
+    @Module
+    companion object {
+        @Provides
+        @JvmStatic
+        @Singleton
+        fun provideSharedPreferences(app: Context): SharedPreferences {
+            return PreferenceManager.getDefaultSharedPreferences(app)
+        }
     }
 }
