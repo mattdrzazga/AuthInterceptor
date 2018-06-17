@@ -30,7 +30,9 @@ Calls with header 'AUTH' will have a token added.
 
 Calls with header 'NO_AUTH' will not have a token added.
 
-Calls without any header will or will not have a token added, depending on what you specify in ````fun withDefault(defaultWithToken: Boolean): AuthInterceptor```` method.
+Calls without any header will or will not have a token added, depending on what you specify in 
+
+````fun withDefault(defaultWithToken: Boolean): AuthInterceptor```` method.
 ````
 'RestApiService.kt'
     
