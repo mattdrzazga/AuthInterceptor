@@ -3,13 +3,13 @@ package com.matt.authinterceptor.sample.simple
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import com.google.gson.JsonArray
 import com.matt.authinterceptor.AuthInterceptor
 import com.matt.authinterceptor.HeaderWriter
 import com.matt.authinterceptor.sample.R
-import com.matt.authinterceptor.sample.data.TokenRepository
 import com.matt.authinterceptor.sample.api.RestApiService
-import com.matt.authinterceptor.sample.api.data.Credentials
-import com.matt.authinterceptor.sample.api.data.Profile
+import com.matt.authinterceptor.sample.data.TokenRepository
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,27 +39,17 @@ class SimpleActivity : AppCompatActivity() {
 
         val api = retrofit.create(RestApiService::class.java)
 
-
-        api.userProfile().enqueue(object : Callback<Profile> {
-            override fun onResponse(call: Call<Profile>?, response: Response<Profile>?) {
-
+        val callback: Callback<JsonArray> = object : Callback<JsonArray> {
+            override fun onFailure(call: Call<JsonArray>?, t: Throwable?) {
+                Log.v("SimpleActivity", "onFailure: " + t.toString())
             }
 
-            override fun onFailure(call: Call<Profile>?, t: Throwable?) {
-
+            override fun onResponse(call: Call<JsonArray>?, response: Response<JsonArray>?) {
+                Log.v("SimpleActivity", "onResponse body: " + response?.body().toString())
             }
-        })
-
-        val credentials = Credentials("thisIsLogin", "thisIsPassword")
-        api.signUp(credentials).enqueue(object : Callback<Profile> {
-            override fun onResponse(call: Call<Profile>?, response: Response<Profile>?) {
-
-            }
-
-            override fun onFailure(call: Call<Profile>?, t: Throwable?) {
-
-            }
-
-        })
+        }
+        api.getUsersDefault().enqueue(callback)
+        api.getUsersAuth().enqueue(callback)
+        api.getUsersNoAuth().enqueue(callback)
     }
 }

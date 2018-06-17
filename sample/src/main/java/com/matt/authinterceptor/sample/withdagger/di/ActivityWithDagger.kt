@@ -2,10 +2,9 @@ package com.matt.authinterceptor.sample.withdagger.di
 
 import android.os.Bundle
 import android.util.Log
-import com.google.gson.JsonObject
+import com.google.gson.JsonArray
 import com.matt.authinterceptor.sample.R
 import com.matt.authinterceptor.sample.api.RestApiService
-import com.matt.authinterceptor.sample.api.data.Profile
 import dagger.android.support.DaggerAppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,28 +19,17 @@ class ActivityWithDagger : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_with_dagger)
 
-        api.userProfile().enqueue(object : Callback<Profile> {
-            override fun onFailure(call: Call<Profile>?, t: Throwable?) {
+        val callback: Callback<JsonArray> = object : Callback<JsonArray> {
+            override fun onFailure(call: Call<JsonArray>?, t: Throwable?) {
                 Log.v("AWD", "onFailure: " + t.toString())
             }
 
-            override fun onResponse(call: Call<Profile>?, response: Response<Profile>?) {
-                Log.v("AWD", "onResponse: " + response?.body().toString())
-            }
-        })
-
-        val callback = object : Callback<JsonObject> {
-            override fun onFailure(call: Call<JsonObject>?, t: Throwable?) {
-                Log.v("AWD", "onFailure: " + t.toString())
-            }
-
-            override fun onResponse(call: Call<JsonObject>?, response: Response<JsonObject>?) {
-                Log.v("AWD", "onResponse: " + response?.body().toString())
+            override fun onResponse(call: Call<JsonArray>?, response: Response<JsonArray>?) {
+                Log.v("AWD", "onResponse body: " + response?.body().toString())
             }
         }
-
-        api.getArticlesDefault().enqueue(callback)
-        api.getArticlesAuth().enqueue(callback)
-        api.getArticlesNoAuth().enqueue(callback)
+        api.getUsersDefault().enqueue(callback)
+        api.getUsersAuth().enqueue(callback)
+        api.getUsersNoAuth().enqueue(callback)
     }
 }
