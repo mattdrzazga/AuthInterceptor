@@ -29,10 +29,10 @@ class HeaderWriter(private val repository: TokenStore) {
     }
 
     private fun hasNoAuthHeader(request: Request): Boolean {
-        return request.headers().values(AT).contains(NO_AUTH)
+        return request.headers().values(AT).contains(VALUE_NO_AUTH)
     }
 
     private fun hasAuthHeader(request: Request): Boolean {
-        return request.headers().values(AT).contains(AUTH)
+        return request.headers().values(AT).contains(VALUE_AUTH)
     }
 }
