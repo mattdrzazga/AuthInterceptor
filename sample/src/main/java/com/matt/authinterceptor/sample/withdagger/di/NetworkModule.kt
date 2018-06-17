@@ -9,6 +9,7 @@ import com.matt.authinterceptor.sample.api.RestApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -43,6 +44,7 @@ class NetworkModule {
         fun provideOkHttpClient(headersInterceptor: AuthInterceptor): OkHttpClient {
             return OkHttpClient.Builder()
                     .addInterceptor(headersInterceptor)
+                    .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.HEADERS })
                     .build()
         }
 
