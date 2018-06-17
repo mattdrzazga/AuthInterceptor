@@ -1,5 +1,6 @@
 package com.matt.authinterceptor.sample.api
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.matt.authinterceptor.AUTH
 import com.matt.authinterceptor.NO_AUTH
@@ -18,18 +19,7 @@ interface RestApiService {
     @POST("profile")
     @Headers(NO_AUTH)
     fun signUp(@Body credentials: Credentials): Call<Profile>
-
-    @GET("articles")
-    fun getArticlesDefault(): Call<JsonObject>
-
-    @GET("articles")
-    @Headers(AUTH)
-    fun getArticlesAuth(): Call<JsonObject>
-
-    @GET("articles")
-    @Headers(NO_AUTH)
-    fun getArticlesNoAuth(): Call<JsonObject>
-
+    
     @Multipart
     @POST("attachment")
     @Headers(NO_AUTH)
@@ -38,4 +28,15 @@ interface RestApiService {
     @Multipart
     @POST("attachment")
     fun uploadAttachmentAsGuest(@Part file: MultipartBody.Part): Call<JsonObject>
+
+    @GET("users")
+    fun getUsersDefault(): Call<JsonArray>
+
+    @GET("users")
+    @Headers(AUTH)
+    fun getUsersAuth(): Call<JsonArray>
+
+    @GET("users")
+    @Headers(NO_AUTH)
+    fun getUsersNoAuth(): Call<JsonArray>
 }
