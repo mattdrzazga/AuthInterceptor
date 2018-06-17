@@ -24,6 +24,7 @@ android {
 }
 
 ext {
+    okHttpVersion = '3.10.0'
     retrofitVersion = '2.4.0'
     daggerVersion = '2.14.1'
 }
@@ -38,6 +39,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
     implementation project(':authinterceptor')
 
     // Dagger2
