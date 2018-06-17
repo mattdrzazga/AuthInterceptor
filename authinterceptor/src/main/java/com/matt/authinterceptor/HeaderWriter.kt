@@ -24,15 +24,15 @@ class HeaderWriter(private val repository: TokenStore) {
     }
 
     private fun removeAuthHeaders(builder: Request.Builder) {
-        builder.removeHeader(AUTH)
-        builder.removeHeader(NO_AUTH)
+        builder.removeHeader(Header.AUTH)
+        builder.removeHeader(Header.NO_AUTH)
     }
 
     private fun hasNoAuthHeader(request: Request): Boolean {
-        return request.headers().values(AT).contains(VALUE_NO_AUTH)
+        return request.headers().values(Header.AT).contains(Header.VALUE_NO_AUTH)
     }
 
     private fun hasAuthHeader(request: Request): Boolean {
-        return request.headers().values(AT).contains(VALUE_AUTH)
+        return request.headers().values(Header.AT).contains(Header.VALUE_AUTH)
     }
 }

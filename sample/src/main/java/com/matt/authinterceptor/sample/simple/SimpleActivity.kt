@@ -24,8 +24,7 @@ class SimpleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_simple)
 
         val repository = TokenRepository(PreferenceManager.getDefaultSharedPreferences(this))
-        val headerWriter = HeaderWriter(repository)
-        val authInterceptor = AuthInterceptor(headerWriter)
+        val authInterceptor = AuthInterceptor.create(repository)
 
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(authInterceptor)

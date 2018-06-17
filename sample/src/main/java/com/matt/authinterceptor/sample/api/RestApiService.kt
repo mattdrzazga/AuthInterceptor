@@ -2,8 +2,7 @@ package com.matt.authinterceptor.sample.api
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.matt.authinterceptor.AUTH
-import com.matt.authinterceptor.NO_AUTH
+import com.matt.authinterceptor.Header
 import com.matt.authinterceptor.sample.api.data.Credentials
 import com.matt.authinterceptor.sample.api.data.Profile
 import okhttp3.MultipartBody
@@ -17,12 +16,12 @@ interface RestApiService {
     fun userProfile(): Call<Profile>
 
     @POST("profile")
-    @Headers(NO_AUTH)
+    @Headers(Header.NO_AUTH)
     fun signUp(@Body credentials: Credentials): Call<Profile>
-    
+
     @Multipart
     @POST("attachment")
-    @Headers(NO_AUTH)
+    @Headers(Header.NO_AUTH)
     fun uploadAttachmentAsUser(@Part file: MultipartBody.Part): Call<JsonObject>
 
     @Multipart
@@ -33,10 +32,10 @@ interface RestApiService {
     fun getUsersDefault(): Call<JsonArray>
 
     @GET("users")
-    @Headers(AUTH)
+    @Headers(Header.AUTH)
     fun getUsersAuth(): Call<JsonArray>
 
     @GET("users")
-    @Headers(NO_AUTH)
+    @Headers(Header.NO_AUTH)
     fun getUsersNoAuth(): Call<JsonArray>
 }
